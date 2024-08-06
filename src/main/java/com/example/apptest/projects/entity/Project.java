@@ -1,14 +1,16 @@
 package com.example.apptest.projects.entity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "projects")
-@Setter
-@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Project {
 
     @Id
@@ -16,6 +18,12 @@ public class Project {
     private Long id;
 
     private String productName;
+
+    @Enumerated(EnumType.STRING)
+    private CategoryType category;
+
+    @Column(name = "seller_id") // 판매자 ID를 저장
+    private Long sellerId;
 
     private int productPrice;
 
