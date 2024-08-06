@@ -21,17 +21,16 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @PostMapping(value = "/addItem", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-
     public ResponseEntity<Map<String, Object>> createProject(
             @RequestPart("projectDTO") AddProjectDTO projectDTO,
             @RequestPart("images") List<MultipartFile> images) {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            boolean success = projectService.createProjectWithFiles(projectDTO, images);
-            response.put("status", success);
-            response.put("message", success ? "Project created successfully" : "Failed to create project");
-            response.put("body", success ? "Some relevant data or object" : null);
+            List<String> imageUrls = projectService.createProjectWithFiles(projectDTO, images);
+            response.put("status", true);
+            response.put("message", "Project created successfully");
+            response.put("body", imageUrls);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,4 +40,7 @@ public class ProjectController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+
 }

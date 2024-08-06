@@ -24,7 +24,7 @@ public class ProjectService {
     private final String uploadDir = "/src/main/resources/static/files";
     private final String baseUrl = "https://port-0-app-spring-lzi5bu5ddf0ec5b5.sel4.cloudtype.app/files/";
 
-    public boolean createProjectWithFiles(AddProjectDTO projectDTO, List<MultipartFile> images) {
+    public List<String> createProjectWithFiles(AddProjectDTO projectDTO, List<MultipartFile> images) {
         try {
             // 파일 저장 및 경로 수집
             List<String> imageUrls = images.stream()
@@ -34,10 +34,10 @@ public class ProjectService {
             // 프로젝트 저장
             Project project = mapToEntity(projectDTO, imageUrls);
             projectRepository.save(project);
-            return true;
+            return imageUrls;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -72,4 +72,5 @@ public class ProjectService {
         project.setImagePaths(imageUrls); // 이미지 경로 추가
         return project;
     }
+
 }
