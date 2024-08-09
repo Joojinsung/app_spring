@@ -6,6 +6,7 @@ import com.example.apptest.category.model.SaveCategoryRecord;
 import com.example.apptest.category.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
