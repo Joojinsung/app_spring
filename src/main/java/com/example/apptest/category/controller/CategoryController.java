@@ -9,7 +9,8 @@ public class CategoryController {
 
 
     @GetMapping("/get")
-    public void getCategory() {
+    public String getCategory() {
+        return "hi";
 
     }
 
